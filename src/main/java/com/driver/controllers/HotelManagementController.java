@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+//this import is to access class in other package
+import com.driver.sevice.Serviceclass;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -21,6 +24,9 @@ import java.util.UUID;
 @RequestMapping("/hotel")
 public class HotelManagementController {
 
+    Serviceclass service=new Serviceclass();
+    
+    
     @PostMapping("/add-hotel")
     public String addHotel(@RequestBody Hotel hotel){
 
@@ -28,9 +34,11 @@ public class HotelManagementController {
         //incase the hotelName is null or the hotel Object is null return an empty a FAILURE
         //Incase somebody is trying to add the duplicate hotelName return FAILURE
         //in all other cases return SUCCESS after successfully adding the hotel to the hotelDb.
+            if(hotel.getHotelName()==null || hotel==null){ return null;}
+            
+            String ans=service.addHotel(hotel);
 
-
-        return null;
+        return ans;
     }
 
     @PostMapping("/add-user")
@@ -38,6 +46,7 @@ public class HotelManagementController {
 
         //You need to add a User Object to the database
         //Assume that user will always be a valid user and return the aadharCardNo of the user
+        service
 
        return null;
     }
